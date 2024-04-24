@@ -1,8 +1,6 @@
 package com.aluracursos.desafio.conversion;
 
-public record Moneda(
-        String monedaPK,
-        double monedaValorPK,
-        String cambioMoneda,
-        double cambioValor) {
+import java.util.ArrayList;
+
+public record Moneda(String base_code){
 }
