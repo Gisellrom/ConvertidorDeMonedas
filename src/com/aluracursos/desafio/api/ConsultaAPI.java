@@ -11,7 +11,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class ConsultaAPI {
-    public JsonObject convierteMoneda(String base) {
+    public JsonObject convierteMoneda(String base) throws IOException{
         String APIKey = "afab9c212ae0791260492268";
         String direccion = "https://v6.exchangerate-api.com/v6/"+APIKey+"/latest/" + base;
 
@@ -25,17 +25,17 @@ public class ConsultaAPI {
             response = client
                     .send(request, HttpResponse.BodyHandlers.ofString());
 
-            //Ir a File > Proyect Structure > Modules > Dependeces > + .jar
-            return new Gson().fromJson(response.body(), JsonObject.class);
+            if(response.statusCode() == 200){
+                //regresamos un JSON con la información de la solicitud
 
-//            if(response.statusCode() == 200){
-//                JsonObject jsonObject = new Gson().fromJson(response.body(), JsonObject.class);
-//                JsonObject conversionRates = jsonObject.getAsJsonObject("conversion_rates");
-//                //double conversionRate = conversionRates.get(changeCode).getAsDouble();
-//                //return valor * conversionRate;
-//            }else{
-//                throw new IOException("Error al realizar la solicitud sel Servidor: " + response.statusCode());
-//            }
+                //JsonObject jsonObject = new Gson().fromJson(response.body(), JsonObject.class);
+
+                //Ir a File > Proyect Structure > Modules > Dependeces > + .jar
+                return new Gson().fromJson(response.body(), JsonObject.class);
+
+            }else{
+                throw new IOException("Error al realizar la solicitud del Servidor: " + response.statusCode());
+            }
 
         } catch (Exception e) {
             throw new RuntimeException("No se encontró la moneda");
