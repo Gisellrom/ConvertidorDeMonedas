@@ -1,6 +1,5 @@
 package com.aluracursos.desafio.api;
 
-import com.aluracursos.desafio.conversion.Moneda;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 

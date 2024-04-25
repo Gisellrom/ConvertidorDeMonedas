@@ -16,9 +16,10 @@ public class Conversion {
         this.amount = amount;
     }
 
-    public double convertidorDeMonedas(){
+    public Double convertidorDeMonedas(){
         ConsultaAPI json = new ConsultaAPI();
         JsonObject valorJson = null;
+
         try {
             valorJson = json.convierteMoneda(baseCode);
         } catch (IOException e) {
@@ -28,6 +29,7 @@ public class Conversion {
         JsonObject conversionRates = valorJson.getAsJsonObject("conversion_rates");
         double conversionRate = conversionRates.get(changeCode).getAsDouble();
         return amount * conversionRate;
+
     }
 
 }//fin de Conversion
